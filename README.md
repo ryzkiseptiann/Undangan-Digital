@@ -1,4 +1,4 @@
-# 💍 Undangan Digital Pernikahan (Modern & Luxury Edition)
+# 💍 Undangan Digital Pernikahan
 
 Website undangan digital pernikahan berbasis web yang elegan, responsif, dan kaya fitur interaktif. Dirancang dengan estetika glassmorphism modern, animasi scroll yang halus, serta dioptimasi untuk performa tinggi di berbagai perangkat.
 
