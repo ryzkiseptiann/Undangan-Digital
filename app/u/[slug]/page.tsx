@@ -73,7 +73,17 @@ export async function generateMetadata({
       type: "website",
       title: pageTitle,
       description,
-      images: ogImages,
+      url: `${baseUrl}/u/${slug}${to ? `?to=${encodeURIComponent(to)}` : ""}`,
+      images: [
+        {
+          url: coverImageUrl,
+          secureUrl: coverImageUrl,
+          width: 1200,
+          height: 630,
+          type: "image/jpeg",
+          alt: `Undangan pernikahan ${invitation.display_names}`,
+        },
+      ],
       locale: "id_ID",
       siteName: "Undangan Digital",
     },
@@ -81,7 +91,14 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: pageTitle,
       description,
-      images: [coverImageUrl],
+      images: [
+        {
+          url: coverImageUrl,
+          alt: `Undangan pernikahan ${invitation.display_names}`,
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
   };
 }

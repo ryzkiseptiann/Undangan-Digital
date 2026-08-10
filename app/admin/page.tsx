@@ -45,23 +45,29 @@ function CopyButton({ text, label = "Copy" }: { text: string; label?: string }) 
 }
 
 function formatWhatsAppMessage(name: string, link: string): string {
-  return `Assalamu’alaikum Warahmatullahi Wabarakatuh
+  return `Assalamu'alaikum Warahmatullahi Wabarakatuh
 
-Dengan penuh sukacita, kami mengundang
+Dengan penuh kebahagiaan, kami mengundang
+
 *${name}*
 
-*Rini & Roni* 💍
-💐 *The Wedding Day*
+untuk hadir dan turut menjadi bagian dari momen istimewa pernikahan kami.
 
-Undangan dan informasi lengkap dapat dilihat melalui tautan berikut:
+*Rini Gustiana Sari & Roni Subagja*
 
-💌 *Buka Undangan*
+*The Wedding Day*
+
+Informasi lengkap mengenai acara, waktu, dan lokasi dapat dilihat melalui tautan undangan berikut:
+
+*Buka Undangan*
 
 ${link}
 
 Kehadiran serta doa restu Bapak/Ibu/Saudara/i akan menjadi kebahagiaan dan kehormatan bagi kami.
 
-Terima kasih. 🙏`;
+Atas perhatian, doa, dan kehadiran yang diberikan, kami mengucapkan terima kasih.
+
+Wassalamu'alaikum Warahmatullahi Wabarakatuh`;
 }
 
 function WhatsAppButton({ name, link }: { name: string; link: string }) {
