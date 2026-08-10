@@ -38,13 +38,29 @@ export async function generateMetadata({
     : (invitation.opening_text?.slice(0, 160) ??
       `Anda diundang ke pernikahan ${invitation.display_names}. Klik untuk membuka undangan digital.`);
 
-  const coverImageUrl = invitation.hero_image_url || "/images/demo/hero.jpeg";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL
+      ? (process.env.NEXT_PUBLIC_SITE_URL.startsWith("http")
+          ? process.env.NEXT_PUBLIC_SITE_URL
+          : `https://${process.env.NEXT_PUBLIC_SITE_URL}`)
+      : process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
+
+  const rawCover = invitation.hero_image_url || "/images/demo/gallery-2.jpg";
+  const coverImageUrl = rawCover.startsWith("http")
+    ? rawCover
+    : `${baseUrl}${rawCover.startsWith("/") ? "" : "/"}${rawCover}`;
 
   const ogImages = [
     {
       url: coverImageUrl,
+      secureUrl: coverImageUrl,
       width: 1200,
       height: 630,
+      type: "image/jpeg",
       alt: `Undangan pernikahan ${invitation.display_names}`,
     },
   ];
@@ -65,7 +81,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: pageTitle,
       description,
-      images: ogImages.map((img) => img.url),
+      images: [coverImageUrl],
     },
   };
 }

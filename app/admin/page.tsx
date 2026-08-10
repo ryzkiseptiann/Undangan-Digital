@@ -44,9 +44,13 @@ function CopyButton({ text, label = "Copy" }: { text: string; label?: string }) 
   );
 }
 
+function formatWhatsAppMessage(name: string, link: string): string {
+  return `Assalamu’alaikum Warahmatullahi Wabarakatuh 🤍\n\nDengan penuh sukacita, kami mengundang\n*${name}*\nuntuk hadir dalam hari bahagia kami.\n\n*Rini & Roni*\n💍 _The Wedding Day_\n\nUndangan dan informasi lengkap dapat dilihat melalui tautan berikut:\n\n✨ *Buka Undangan*\n${link}\n\nKehadiran serta doa restu Bapak/Ibu/Saudara/i akan menjadi kebahagiaan dan kehormatan bagi kami.\n\nTerima kasih. 🤍`;
+}
+
 function WhatsAppButton({ name, link }: { name: string; link: string }) {
   function handleClick() {
-    const message = `Assalamualaikum ${name},\n\nKami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam pernikahan kami. 🎊\n\nBerikut undangan digitalnya, mohon dibuka:\n${link}\n\nTerima kasih atas kehadiran dan doa restunya. 🙏`;
+    const message = formatWhatsAppMessage(name, link);
     window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
   }
   return (
@@ -160,7 +164,8 @@ function LinkGeneratorTab({ slug }: { slug: string }) {
                     <p className="mt-0.5 truncate text-[11px] text-rust-300/35">{link}</p>
                   </div>
                   <div className="flex items-center gap-1 flex-shrink-0">
-                    <CopyButton text={link} label="Copy" />
+                    <CopyButton text={link} label="Copy Link" />
+                    <CopyButton text={formatWhatsAppMessage(name, link)} label="Copy Pesan" />
                     <WhatsAppButton name={name} link={link} />
                     <button
                       type="button"

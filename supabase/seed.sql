@@ -28,7 +28,7 @@ values (
   'Rini Gustiana Sari, putri dari Bapak Rukmana (Ache) dan Ibu Siti Maryam, bersama Roni Subagja, putra dari Bapak Syamsudin dan Ibu Euis Juati, dengan penuh rasa syukur mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu.',
   'Dua hati, satu janji, dan doa terbaik yang mengiringi langkah baru kami.',
   '2026-11-22 08:00:00+07',
-  '/images/demo/hero.jpeg',
+  '/images/demo/gallery-2.jpg',
   '/images/demo/Wanita.jpeg',
   '/images/demo/Pria.jpeg',
   '/music/Bermuara.mp3',
