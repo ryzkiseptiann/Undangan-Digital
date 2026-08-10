@@ -68,10 +68,32 @@ Terima kasih.
 Wassalamu'alaikum Warahmatullahi Wabarakatuh`;
 }
 
+/** Encode text for wa.me URL while preserving emoji characters */
+function encodeWAMessage(text: string): string {
+  // encodeURIComponent then decode emoji back (4-byte Unicode supplementary chars)
+  return text.split("").reduce((acc, char) => {
+    const code = char.codePointAt(0) ?? 0;
+    // Keep emoji (>= U+1F300) and extended chars unencoded — WhatsApp handles them fine
+    if (code > 0x7e) {
+      return acc + encodeURIComponent(char);
+    }
+    return acc + encodeURIComponent(char);
+  }, "")
+    // Restore percent-encoded emoji (F0 xx xx xx sequences) back to raw chars
+    .replace(/%F0%9[0-9A-F]%[89AB][0-9A-F]%[89AB][0-9A-F]/gi, (encoded) =>
+      decodeURIComponent(encoded)
+    )
+    // Also restore 3-byte sequences for emoji in BMP supplementary range
+    .replace(/%E[0-9A-F]%[89AB][0-9A-F]%[89AB][0-9A-F]/gi, (encoded) =>
+      decodeURIComponent(encoded)
+    );
+}
+
 function WhatsAppButton({ name, link }: { name: string; link: string }) {
   function handleClick() {
     const message = formatWhatsAppMessage(name, link);
-    window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+    const encoded = encodeWAMessage(message);
+    window.open(`https://wa.me/?text=${encoded}`, "_blank", "noopener,noreferrer");
   }
   return (
     <button
