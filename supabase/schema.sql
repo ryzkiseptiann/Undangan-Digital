@@ -64,7 +64,7 @@ create table if not exists public.rsvps (
   created_at timestamptz not null default now(),
   constraint rsvps_name_length check (char_length(trim(name)) between 2 and 100),
   constraint rsvps_attendance_status check (
-    attendance_status in ('attending', 'not_attending', 'maybe')
+    attendance_status in ('attending', 'not_attending')
   ),
   constraint rsvps_pax_positive check (pax >= 1),
   constraint rsvps_note_length check (note is null or char_length(note) <= 300)

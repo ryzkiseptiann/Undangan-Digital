@@ -14,10 +14,10 @@ export const revalidate = 60;
 
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+  searchParams,
+}: InvitationPageProps): Promise<Metadata> {
   const { slug } = await params;
+  const { to } = await searchParams;
   const detail = await getInvitationBySlug(slug);
 
   if (!detail) {
@@ -28,36 +28,42 @@ export async function generateMetadata({
   }
 
   const { invitation } = detail;
-  const description =
-    invitation.opening_text?.slice(0, 160) ??
-    `Anda diundang ke pernikahan ${invitation.display_names}. Klik untuk membuka undangan digital.`;
+  const guestName = to ? decodeURIComponent(to) : "";
+  const pageTitle = guestName
+    ? `Undangan Pernikahan ${invitation.display_names} untuk ${guestName}`
+    : invitation.title;
 
-  const ogImages = invitation.hero_image_url
-    ? [
-        {
-          url: invitation.hero_image_url,
-          width: 1200,
-          height: 630,
-          alt: `Undangan pernikahan ${invitation.display_names}`,
-        },
-      ]
-    : [];
+  const description = guestName
+    ? `Kepada Yth. ${guestName}, kami mengundang Anda untuk menghadiri pernikahan ${invitation.display_names}.`
+    : (invitation.opening_text?.slice(0, 160) ??
+      `Anda diundang ke pernikahan ${invitation.display_names}. Klik untuk membuka undangan digital.`);
+
+  const coverImageUrl = invitation.hero_image_url || "/images/demo/hero.jpeg";
+
+  const ogImages = [
+    {
+      url: coverImageUrl,
+      width: 1200,
+      height: 630,
+      alt: `Undangan pernikahan ${invitation.display_names}`,
+    },
+  ];
 
   return {
-    title: invitation.title,
+    title: pageTitle,
     description,
-    // Sembunyikan dari mesin pencari — undangan bersifat personal
     robots: { index: false, follow: false },
     openGraph: {
       type: "website",
-      title: invitation.title,
+      title: pageTitle,
       description,
       images: ogImages,
       locale: "id_ID",
+      siteName: "Undangan Digital",
     },
     twitter: {
       card: "summary_large_image",
-      title: invitation.title,
+      title: pageTitle,
       description,
       images: ogImages.map((img) => img.url),
     },
