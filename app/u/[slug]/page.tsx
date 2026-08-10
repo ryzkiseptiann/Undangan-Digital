@@ -49,7 +49,10 @@ export async function generateMetadata({
       ? `https://${process.env.VERCEL_URL}`
       : "http://localhost:3000";
 
-  const rawCover = invitation.hero_image_url || "/images/demo/gallery-2.jpg";
+  const rawCover =
+    invitation.hero_image_url && invitation.hero_image_url !== "/images/demo/hero.jpeg"
+      ? invitation.hero_image_url
+      : "/images/demo/gallery-2.jpg";
   const coverImageUrl = rawCover.startsWith("http")
     ? rawCover
     : `${baseUrl}${rawCover.startsWith("/") ? "" : "/"}${rawCover}`;
