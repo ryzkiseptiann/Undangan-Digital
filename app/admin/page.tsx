@@ -45,7 +45,23 @@ function CopyButton({ text, label = "Copy" }: { text: string; label?: string }) 
 }
 
 function formatWhatsAppMessage(name: string, link: string): string {
-  return `Assalamu’alaikum Warahmatullahi Wabarakatuh 🤍\n\nDengan penuh sukacita, kami mengundang\n*${name}*\nuntuk hadir dalam hari bahagia kami.\n\n*Rini & Roni*\n💍 _The Wedding Day_\n\nUndangan dan informasi lengkap dapat dilihat melalui tautan berikut:\n\n✨ *Buka Undangan*\n${link}\n\nKehadiran serta doa restu Bapak/Ibu/Saudara/i akan menjadi kebahagiaan dan kehormatan bagi kami.\n\nTerima kasih. 🤍`;
+  return `Assalamu’alaikum Warahmatullahi Wabarakatuh
+
+Dengan penuh sukacita, kami mengundang
+*${name}*
+
+*Rini & Roni* 💍
+💐 *The Wedding Day*
+
+Undangan dan informasi lengkap dapat dilihat melalui tautan berikut:
+
+💌 *Buka Undangan*
+
+${link}
+
+Kehadiran serta doa restu Bapak/Ibu/Saudara/i akan menjadi kebahagiaan dan kehormatan bagi kami.
+
+Terima kasih. 🙏`;
 }
 
 function WhatsAppButton({ name, link }: { name: string; link: string }) {
